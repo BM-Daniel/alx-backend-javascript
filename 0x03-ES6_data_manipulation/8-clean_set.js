@@ -1,12 +1,12 @@
 export default function cleanSet(set, startString) {
   let concat = '';
 
-  if (startString.length === 0) {
+  if (!startString || startString.length === 0) {
     return concat;
   }
 
   for (const value of set) {
-    if (value.startsWith(startString)) {
+    if (value && value.startsWith(startString)) {
       concat += `${value.slice(startString.length)}-`;
     }
   }
