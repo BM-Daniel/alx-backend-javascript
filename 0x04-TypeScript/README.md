@@ -23,3 +23,6 @@
     Your code should use the ts extension when possible
     The Typescript compiler should not show any warning or error when compiling your code
 
+How to run them.
+    Change directory into the js folder and then type `npx webpack` or `npm run build`
+    This will work if all packages required have been installed
