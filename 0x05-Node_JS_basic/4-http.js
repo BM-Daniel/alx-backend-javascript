@@ -10,7 +10,7 @@ const app = http.createServer((request, response) => {
 });
 
 app.listen(port, hostname, () => {
-  console.log(`Serve listening at http://${hostname}:${port}`);
+  // console.log(`Serve listening at http://${hostname}:${port}`);
 });
 
 module.export = app;
