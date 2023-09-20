@@ -1,50 +1,49 @@
 const fs = require('fs');
 
-function countStudents(filePath) {
+function countStudents(path) {
   return new Promise((resolve, reject) => {
-    fs.promises.readFile(filePath, 'utf8')
-      .then((data) => {
-        const rowData = data.split('\n');
-        const fieldCounts = {};
-        let rowDataCount = 0;
+    fs.readFile(path, 'utf8', (err, data) => {
+      if (err) {
+        reject(Error('Cannot load the database'));
+        return;
+      }
 
-        for (const row of rowData) {
-          const trimmedRow = row.trim();
+      const response = [];
+      let message;
 
-          if (trimmedRow === '');
+      const content = data.toString().split('\n');
+      let students = content.filter((value) => value);
 
-          rowDataCount += 1;
+      students = students.map((value) => value.split(','));
 
-          const columns = trimmedRow.split(',');
-          const field = columns[columns.length - 1];
+      const numberOfStudents = students.length ? students.length - 1 : 0;
 
-          if (!fieldCounts[field]) {
-            fieldCounts[field] = {
-              count: 0,
-              list: [],
-            };
+      message = `Number of students: ${numberOfStudents}`;
+      console.log(message);
+
+      response.push(message);
+
+      const fields = {};
+      for (const student in students) {
+        if (student !== 0) {
+          if (!fields[students[student][3]]) {
+            fields[students[student][3]] = [];
           }
 
-          fieldCounts[field].count += 1;
-          fieldCounts[field].list.push(columns[0]);
+          fields[students[student][3]].push(students[student][0]);
         }
+      }
 
-        const totalStudents = rowDataCount - 1;
+      delete fields.field;
 
-        console.log(`Number of students: ${totalStudents}`);
+      for (const key of Object.keys(fields)) {
+        message = `Number of students in ${key}: ${fields[key].length}. List: ${fields[key].join(', ')}`;
+        console.log(message);
+        response.push(message);
+      }
 
-        delete fieldCounts.field;
-
-        for (const field of Object.keys(fieldCounts)) {
-          const { count, list } = fieldCounts[field];
-          console.log(`Number of students in ${field}: ${count}. List: ${list.join(', ')}`);
-        }
-
-        resolve(totalStudents);
-      })
-      .catch(() => {
-        reject(new Error('Cannot load the database'));
-      });
+      resolve(response);
+    });
   });
 }
 
