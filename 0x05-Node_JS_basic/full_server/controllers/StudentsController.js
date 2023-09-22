@@ -14,25 +14,25 @@ export default class StudentsController {
           students.push(message);
         }
 
-        response.status(200).send(`${students.join('\n')}`);
+        response.send(200, `${students.join('\n')}`);
       })
       .catch(() => {
-        response.status(500).send('Cannot load the database');
+        response.send(500, 'Cannot load the database');
       });
   }
 
   static getAllStudentsByMajor(request, response, DATABASE) {
     if (request.params.major !== 'CS' && request.params.major !== 'SWE') {
-      response.status(500).send('Major parameter must be CS or SWE');
+      response.send(500, 'Major parameter must be CS or SWE');
     } else {
       readDatabase(DATABASE)
         .then((fields) => {
           const students = fields[request.params.major];
 
-          response.status(200).send(`List: ${students.join(', ')}`);
+          response.send(200, `List: ${students.join(', ')}`);
         })
         .catch(() => {
-          response.status(500).send('Cannot load the database');
+          response.send(500, 'Cannot load the database');
         });
     }
   }
