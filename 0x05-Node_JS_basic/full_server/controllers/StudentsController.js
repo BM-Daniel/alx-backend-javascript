@@ -1,6 +1,6 @@
 import readDatabase from '../utils';
 
-export default class StudentsController {
+class StudentsController {
   static getAllStudents(request, response, DATABASE) {
     readDatabase(DATABASE)
       .then((fields) => {
@@ -37,3 +37,5 @@ export default class StudentsController {
     }
   }
 }
+
+export default StudentsController;

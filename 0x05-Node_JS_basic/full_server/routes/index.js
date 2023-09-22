@@ -2,7 +2,7 @@ import express from 'express';
 import AppController from '../controllers/AppController';
 import StudentsController from '../controllers/StudentsController';
 
-export default function serverRoutes(app) {
+function serverRoutes(app) {
   const router = express.Router();
   const filePath = process.argv[2];
 
@@ -20,3 +20,5 @@ export default function serverRoutes(app) {
     StudentsController.getAllStudentsByMajor(req, res, filePath);
   });
 }
+
+export default serverRoutes;
