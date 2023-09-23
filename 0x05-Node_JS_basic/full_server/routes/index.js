@@ -2,10 +2,8 @@ import express from 'express';
 import AppController from '../controllers/AppController';
 import StudentsController from '../controllers/StudentsController';
 
-function serverRoutes(app) {
+function controllerRouting(app) {
   const router = express.Router();
-  const filePath = process.argv[2];
-
   app.use('/', router);
 
   router.get('/', (req, res) => {
@@ -13,12 +11,12 @@ function serverRoutes(app) {
   });
 
   router.get('/students', (req, res) => {
-    StudentsController.getAllStudents(req, res, filePath);
+    StudentsController.getAllStudents(req, res, process.argv[2]);
   });
 
   router.get('/students/:major', (req, res) => {
-    StudentsController.getAllStudentsByMajor(req, res, filePath);
+    StudentsController.getAllStudentsByMajor(req, res, process.argv[2]);
   });
 }
 
-export default serverRoutes;
+export default controllerRoutes;
