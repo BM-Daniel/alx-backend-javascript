@@ -19,4 +19,4 @@ function controllerRouting(app) {
   });
 }
 
-export default controllerRoutes;
+export default controllerRouting;

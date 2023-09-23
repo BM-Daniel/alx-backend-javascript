@@ -7,24 +7,26 @@ function readDatabase(path) {
         reject(Error(err));
         return;
       }
-
       const content = data.toString().split('\n');
-      let students = content.filter((value) => value);
 
-      students = students.map((value) => value.split(','));
+      let students = content.filter((item) => item);
+
+      students = students.map((item) => item.split(','));
 
       const fields = {};
-      for (const student in students) {
-        if (student !== 0) {
-          if (!fields[students[student][3]]) fields[students[student][3]] = [];
+      for (const i in students) {
+        if (i !== 0) {
+          if (!fields[students[i][3]]) fields[students[i][3]] = [];
 
-          fields[students[student][3]].push(students[student][0]);
+          fields[students[i][3]].push(students[i][0]);
         }
       }
 
       delete fields.field;
 
       resolve(fields);
+
+      //   return fields;
     });
   });
 }
