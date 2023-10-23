@@ -4,7 +4,7 @@ const sendPaymentRequestToApi = require('./3-payment');
 const assert = require('assert');
 const Utils = require('./utils');
 
-describe('sendPaymentRequestToApi', () => { 
+describe('sendPaymentRequestToApi', function() { 
   it('make sure Utils.calculateNumber was called just once', function() {
     const spy = sinon.spy(Utils, 'calculateNumber');
 
