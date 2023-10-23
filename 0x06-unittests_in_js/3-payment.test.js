@@ -12,4 +12,4 @@ describe('sendPaymentRequestToApi', () => {
     assert(spy.calledOnce);
     spy.restore();
   });
- });
+});
