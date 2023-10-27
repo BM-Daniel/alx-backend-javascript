@@ -9,7 +9,7 @@ describe('', () => {
   let spyBoy;
 
   beforeEach(() => {
-    sinon.spy(console, 'log');
+    spyBoy = sinon.spy(console, 'log');
   });
 
   afterEach(() => {
