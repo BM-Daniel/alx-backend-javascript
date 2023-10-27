@@ -111,7 +111,7 @@ describe("Login page", () => {
       body: { userName: "DAN" },
     };
 
-    request.post(try1, (err, res, body) => {
+    request.post(try2, (err, res, body) => {
       if (err) {
         expect(res.statusCode).to.not.equal(200);
       } else {
@@ -129,7 +129,7 @@ describe("Login page", () => {
       body: { user: "DAN" },
     };
 
-    request.post(try1, (err, res, body) => {
+    request.post(try3, (err, res, body) => {
       expect(res.statusCode).to.equal(404);
       done();
     });
